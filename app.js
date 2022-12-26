@@ -36,8 +36,8 @@ const server = http.createServer((req, res) => {
         const parsed = Buffer.concat(message).toString();
 
         fs.writeFile("message.txt", parsed.split("=")[1], () => {
-          res.setHeader("Content-Type", "text/html");
-          res.write("<h1>About Posted</h1>");
+          res.statusCode = 302;
+          res.setHeader("Location", "/");
           return res.end();
         });
       });
