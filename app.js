@@ -35,11 +35,11 @@ const server = http.createServer((req, res) => {
       req.on("end", () => {
         const parsed = Buffer.concat(message).toString();
 
-        fs.writeFileSync("message.txt", parsed.split("=")[1]);
-
-        res.setHeader("Content-Type", "text/html");
-        res.write("<h1>About Posted</h1>");
-        return res.end();
+        fs.writeFile("message.txt", parsed.split("=")[1], () => {
+          res.setHeader("Content-Type", "text/html");
+          res.write("<h1>About Posted</h1>");
+          return res.end();
+        });
       });
     } else {
       res.setHeader("Content-Type", "text/html");
