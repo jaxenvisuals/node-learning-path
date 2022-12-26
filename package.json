@@ -1,0 +1,19 @@
+{
+  "name": "node-learning-path",
+  "version": "1.0.0",
+  "description": "Learning node for real",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaxenvisuals/node-learning-path.git"
+  },
+  "author": "Jackson Ogunmasa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaxenvisuals/node-learning-path/issues"
+  },
+  "homepage": "https://github.com/jaxenvisuals/node-learning-path#readme"
+}
