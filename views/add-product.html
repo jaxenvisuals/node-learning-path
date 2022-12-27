@@ -7,18 +7,23 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>Shop</title>
+    <title>Add Product</title>
   </head>
   <body>
-    <h1>Welcome to Shop!</h1>
-    <p>Buy products here</p>
+    <h1>Add Product</h1>
+    <form action="/products" method="POST">
+      <label for="product_name">Product Name</label>
+      <input id="product_name" type="text" name="product_name" />
+
+      <input type="submit" />
+    </form>
 
     <ul>
       <li>
         <a href="/">Home</a>
       </li>
       <li>
-        <a href="/products/">Products</a>
+        <a href="/products">Products</a>
       </li>
     </ul>
   </body>
