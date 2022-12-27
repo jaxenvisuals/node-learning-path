@@ -22,7 +22,7 @@ const requestHandler = (req, res) => {
         </body>
     </html>
       `);
-    return res.end();
+    return res.send();
   } else if (url === "/about") {
     if (req.method === "POST") {
       const message = [];
@@ -37,18 +37,18 @@ const requestHandler = (req, res) => {
         fs.writeFile("message.txt", parsed.split("=")[1], () => {
           res.statusCode = 302;
           res.setHeader("Location", "/");
-          return res.end();
+          return res.send();
         });
       });
     } else {
       res.setHeader("Content-Type", "text/html");
       res.write("<h1>About</h1>");
-      return res.end();
+      return res.send();
     }
   } else {
     res.setHeader("Content-Type", "text/html");
     res.write("<h1>404</h1>");
-    return res.end();
+    return res.send();
   }
 };
 
