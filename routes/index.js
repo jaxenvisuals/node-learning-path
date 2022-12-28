@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.get("/", (req, res, next) => {
   // Home
-  res.status(200).sendFile(path.join(rootDir, "views", "home.html"));
+  res.status(200).sendFile(path.join(rootDir, "views", "shop.html"));
 });
 
 router.use("/products", products);
