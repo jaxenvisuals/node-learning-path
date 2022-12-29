@@ -10,7 +10,11 @@ router.get("/", (req, res, next) => {
   // Home
   res
     .status(200)
-    .render("shop", { docTitle: "Shop", products: store.products });
+    .render("shop", {
+      docTitle: "Shop",
+      products: store.products,
+      url: "/",
+    });
 });
 
 router.use("/products", products);
