@@ -8,6 +8,9 @@ router.get("/add-product", (req, res, next) => {
   res.status(200).render("add-product", {
     docTitle: "Add Product",
     url: "/products/add-product",
+    useProductStyle: true,
+    useFormsStyle: true,
+    pageIsAddProduct: true,
   });
 });
 
