@@ -1,25 +1,17 @@
-const path = require("path");
-
 const express = require("express");
-
-const rootDir = require("../util/path");
 
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-  res.status(200).sendFile(path.join(rootDir, "views", "products.html"));
-});
+const store = require("../store/index");
 
 router.get("/add-product", (req, res, next) => {
-  res
-    .status(200)
-    .sendFile(path.join(rootDir, "views", "add-product.html"));
+  res.status(200).render("add-product");
 });
 
-router.post("/", (req, res, next) => {
-  console.log(req.body); // parsed body
+router.post("/add-product", (req, res, next) => {
+  store.products.push(req.body);
 
-  res.setHeader("Location", "/products");
+  res.setHeader("Location", "/");
   res.status(302).send();
 });
 
