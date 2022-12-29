@@ -2,23 +2,14 @@ const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const expressHbs = require("express-handlebars");
 
 const router = require("./routes/index");
 const rootDir = require("./util/path");
 
 const app = express();
 
-app.engine(
-  ".hbs",
-  expressHbs.engine({
-    extname: ".hbs",
-    defaultLayout: "main",
-  })
-);
-
 // set view engine
-app.set("view engine", ".hbs");
+app.set("view engine", "ejs");
 app.set("views", "views");
 
 // Serve static files
