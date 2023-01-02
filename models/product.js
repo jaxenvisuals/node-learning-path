@@ -18,7 +18,7 @@ module.exports.Product = class {
     let products = [];
 
     fs.readFile(productJsonPath, (error, data) => {
-      if (data) {
+      if (!error) {
         products = JSON.parse(data);
       }
 
@@ -32,9 +32,9 @@ module.exports.Product = class {
 
   static getAll(cb) {
     fs.readFile(productJsonPath, (error, data) => {
-      if (!data) return cb([]);
+      if (error) return cb([]);
 
-      const contents = JSON.parse(Buffer.concat([data]).toString());
+      const contents = JSON.parse(data);
 
       cb(contents || []);
     });
