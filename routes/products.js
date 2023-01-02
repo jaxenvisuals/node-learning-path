@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const store = require("../store/index");
+const productModel = require("../model/product");
 
 router.get("/add-product", (req, res, next) => {
   res.status(200).render("add-product", {
@@ -15,7 +15,9 @@ router.get("/add-product", (req, res, next) => {
 });
 
 router.post("/add-product", (req, res, next) => {
-  store.products.push(req.body);
+  const product = new productModel.Product({ title: req.body.title });
+
+  product.add();
 
   res.setHeader("Location", "/");
   res.status(302).send();
