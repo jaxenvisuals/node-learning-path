@@ -1,14 +1,1 @@
-[
-  {
-    "title": "A Book",
-    "imageUrl": "https://www.publicdomainpictures.net/pictures/10000/velka/1-1210009435EGmE.jpg",
-    "description": "This is an awesome book!",
-    "price": "19"
-  },
-  {
-    "title": "Harry",
-    "imageUrl": "https://www.publicdomainpictures.net/pictures/10000/velka/1-1210009435EGmE.jpg",
-    "description": "Harry Potter",
-    "price": "300"
-  }
-]
+[{"title":"  A Book  ","imageUrl":" https://picsum.photos/seed/randm/200/300 ","description":"  This is an awesome book!  ","price":"19","id":"NODE-IeGtM"},{"title":"  Harry Meghan ","imageUrl":"https://picsum.photos/seed/rand/200/300","description":"  Harry Potter  ","price":"300","id":"NODE-BqzcR"},{"title":"Oprah","imageUrl":"https://picsum.photos/200/300","description":"Nice","price":"200","id":"0.9172750211771774"},{"title":" Beginners Guide to success","imageUrl":" https://picsum.photos/seed/suc/200/300 ","description":" Lovely ","price":"1200","id":"0.2964299941509705"}]

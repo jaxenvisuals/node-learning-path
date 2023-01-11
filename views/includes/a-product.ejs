@@ -1,0 +1,31 @@
+<article class="card product-item">
+  <header class="card__header">
+    <h1 class="product__title">
+      <%= product.title %>
+    </h1>
+  </header>
+  <div class="card__image">
+    <img src="<%= product.imageUrl %>" alt="<%= product.title %>">
+  </div>
+  <div class="card__content">
+    <h2 class="product__price">$<%= product.price %>
+    </h2>
+    <p class="product__description">
+      <%= product.description %>
+    </p>
+  </div>
+  <div class="card__actions">
+    <a href="/product-detail/<%= product.id %> " class="btn">View</a>
+
+    <% if(userScope.editProduct) {%>
+    <a href="/admin/edit-product/<%= product.id %> " class="btn">Edit</a>
+    <% } %>
+    <form action="<% if(userScope.addToCart) { %>/add-to-cart/<%= product.id %><% } else if(userScope.deleteProduct) { %>/admin/delete-product<% } %>" method="POST">
+      <% if(userScope.addToCart) { %>
+      <button class="btn">Add to Cart</button>
+      <% } if(userScope.deleteProduct) { %>
+      <button class="btn" type="submit">Delete</button>
+      <% } %>
+    </form>
+  </div>
+</article>
