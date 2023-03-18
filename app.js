@@ -3,22 +3,12 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const db = require("./util/database");
-
 const errorController = require("./controllers/error");
 
 const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", "views");
-
-db.execute("SELECT * FROM products")
-  .then((response) => {
-    console.log(response);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");

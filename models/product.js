@@ -1,21 +1,4 @@
-const fs = require("fs");
-const path = require("path");
-
-const p = path.join(
-  path.dirname(process.mainModule.filename),
-  "data",
-  "products.json"
-);
-
-const getProductsFromFile = (cb) => {
-  fs.readFile(p, (err, fileContent) => {
-    if (err) {
-      cb([]);
-    } else {
-      cb(JSON.parse(fileContent));
-    }
-  });
-};
+const db = require("../util/database");
 
 module.exports = class Product {
   constructor({ title, imageUrl, description, price, id }) {
@@ -26,64 +9,26 @@ module.exports = class Product {
     this.id = id || null;
   }
 
-  save(cb) {
-    getProductsFromFile((products) => {
-      if (this.id) {
-        cb();
-        return;
-      }
-
-      const id = Math.random().toString();
-
-      products.push({ ...this, id });
-      this.writeProducts(products, (err) => {
-        if (err) {
-          cb();
-
-          return;
-        }
-
-        this.id = id;
-        cb();
-      });
-    });
+  save() {
+    return db.execute(
+      "INSERT INTO products (title, price, description, imageUrl) VALUES (?, ?, ?, ?)",
+      [this.title, this.price, this.description, this.imageUrl]
+    );
   }
 
-  update(cb) {
-    getProductsFromFile((products) => {
-      const updatedProducts = products.map((prod) =>
-        prod.id === this.id ? this : prod
-      );
-
-      Product.writeProducts(updatedProducts, (err) => {
-        if (err) {
-          cb();
-
-          return;
-        }
-
-        cb();
-      });
-    });
-  }
+  update() {}
 
   get get() {
     return this;
   }
 
-  static writeProducts(products, cb) {
-    fs.writeFile(p, JSON.stringify(products), cb);
+  static fetchAll() {
+    return db.execute("SELECT * FROM products");
   }
 
-  static fetchAll(cb) {
-    getProductsFromFile(cb);
-  }
-
-  static findProduct({ id, cb }) {
-    getProductsFromFile((allProducts) => {
-      const product = allProducts.find((prod) => prod.id === id);
-
-      cb(product);
-    });
+  static findProduct({ id }) {
+    return db.execute("SELECT * FROM products WHERE products.id = ?", [
+      id,
+    ]);
   }
 };

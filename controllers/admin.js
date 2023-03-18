@@ -37,9 +37,12 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   const product = new Product({ title, imageUrl, description, price });
-  product.save(() => {
-    res.redirect("/");
-  });
+  product
+    .save()
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((err) => console.log("error saving product", err));
 };
 
 exports.postEditProduct = (req, res, next) => {
@@ -53,15 +56,17 @@ exports.postEditProduct = (req, res, next) => {
 };
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll((products) => {
-    res.render("admin/products", {
-      prods: products,
-      pageTitle: "Admin Products",
-      path: "/admin/products",
-      userScope: {
-        editProduct: true,
-        deleteProduct: true,
-      },
-    });
-  });
+  Product.fetchAll()
+    .then(([rows, columns]) => {
+      res.render("admin/products", {
+        prods: rows,
+        pageTitle: "Admin Products",
+        path: "/admin/products",
+        userScope: {
+          editProduct: true,
+          deleteProduct: true,
+        },
+      });
+    })
+    .catch((err) => console.log("Error fetching products", err));
 };
