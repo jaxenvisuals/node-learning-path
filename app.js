@@ -18,12 +18,16 @@ const startApp = (forceSyncDBAnswer) => {
   // initialize database and then open ports
   initializeDB(forceSyncDB)
     .then(() => {
+      const cookieParser = require("cookie-parser");
       const express = require("express");
       const bodyParser = require("body-parser");
 
       const router = require("./controllers/router");
 
       const app = express();
+
+      // set cookie parser
+      app.use(cookieParser());
 
       // set view engine
       app.set("view engine", "ejs");

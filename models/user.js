@@ -13,7 +13,12 @@ const User = sequelize.define("user", {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  email: {
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+  },
+  password: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -65,8 +70,27 @@ const UserRole = sequelize.define("userRole", {
   },
 });
 
+const Session = sequelize.define("session", {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
+});
+
+const createUser = async (name, username, password) => {
+  return await User.create({
+    name,
+    username,
+    password,
+  });
+};
+
 module.exports = {
   User,
   Role,
   UserRole,
+  Session,
+  createUser,
 };

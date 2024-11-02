@@ -1,5 +1,5 @@
 const db = require("../util/database");
-const { Role, User, UserRole } = require("./user");
+const { Role, User, UserRole, Session, createUser } = require("./user");
 
 const initializeDB = async (forceSyncDB = false) => {
   User.belongsToMany(Role, {
@@ -8,6 +8,8 @@ const initializeDB = async (forceSyncDB = false) => {
   Role.belongsToMany(User, {
     through: UserRole,
   });
+  User.hasMany(Session);
+  Session.belongsTo(User);
 
   await db.sync({
     force: forceSyncDB,
@@ -15,6 +17,8 @@ const initializeDB = async (forceSyncDB = false) => {
 
   if (forceSyncDB) {
     await createRoles();
+    await createAdmin();
+    await assignAdminRole();
   }
 
   console.warn("Database is synchronized");
@@ -42,6 +46,26 @@ const createRoles = async () => {
     cartRead: true,
     cartCreate: true,
   });
+};
+
+const createAdmin = async () => {
+  await createUser("admin", "admin", "admin");
+};
+
+const assignAdminRole = async () => {
+  const admin = await User.findOne({
+    where: {
+      username: "admin",
+    },
+  });
+
+  const adminRole = await Role.findOne({
+    where: {
+      name: "admin",
+    },
+  });
+
+  await admin.addRole(adminRole);
 };
 
 module.exports = {

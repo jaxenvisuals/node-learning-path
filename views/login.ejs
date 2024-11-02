@@ -1,0 +1,61 @@
+<%- include('./includes/header.ejs')
+    %>
+</head>
+
+<body>
+  <%- include('./includes/navbar.ejs')
+            %>
+
+  <div class="container mt-5">
+
+    <div>
+      <div class="row align-items-start">
+        <div class="col"></div>
+        <div class="col">
+          <div class="card">
+            <div class="card-header">
+              Login
+            </div>
+            <div class="card-body">
+              <% if(successMessage) { %>
+              <div class="alert alert-success" role="alert">
+                <%= successMessage %>
+              </div>
+              <% } else if(errorMessage) { %>
+              <div class="alert alert-danger" role="alert">
+                <%= errorMessage %>
+              </div>
+              <% } %>
+
+              <h5 class="card-title">Login</h5>
+              <p class="card-text">
+                It's all about Bugs 🐞 and insects 🦟. Login and start debugging and de-insec...🤫
+              </p>
+
+
+              <form class="row g-3" method="POST" action="/login">
+                <div class="col-md-12">
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" class="form-control" id="username" name="username">
+                </div>
+                <div class="col-md-12">
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary">Bug-Up 🐞</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+
+    </div>
+
+  </div>
+</body>
+
+<%- include('./includes/footer.ejs')
+        %>
