@@ -80,11 +80,15 @@ const Session = sequelize.define("session", {
 });
 
 const createUser = async (name, username, password) => {
-  return await User.create({
+  const user = await User.create({
     name,
     username,
     password,
   });
+
+  await user.addRole(2);
+
+  return user;
 };
 
 module.exports = {
